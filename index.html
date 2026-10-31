@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KYOKO MOMOSE — Portfolio</title>
+  <meta name="description" content="百瀬響子 ポートフォリオ。Web Design / Video / Writing / Music">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@100;200;300;400&display=swap"
+    rel="stylesheet">
+
+  <!-- スタイル (SCSSをコンパイルしたCSS) -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="theme-blue.css">
+</head>
+
+<body>
+  <!-- 背景光源 -->
+  <div class="ambient-lights" id="ambientLights">
+    <div class="ambient-light" style="width:600px;height:600px;top:5vh;left:-8vw;"></div>
+    <div class="ambient-light" style="width:500px;height:500px;top:28vh;right:-6vw;"></div>
+    <div class="ambient-light" style="width:700px;height:700px;top:55vh;left:20vw;opacity:0.2;"></div>
+    <div class="ambient-light" style="width:550px;height:550px;top:100vh;right:5vw;"></div>
+    <div class="ambient-light" style="width:600px;height:600px;top:155vh;left:-5vw;opacity:0.4;"></div>
+    <div class="ambient-light" style="width:480px;height:480px;top:210vh;right:10vw;"></div>
+  </div>
+
+  <!-- グレインノイズ -->
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- カスタムカーソル -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursor-follower"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav__name">KYOKO MOMOSE</a>
+    <ul class="nav__links" id="nav-links">
+      <li><a href="#about">PROFILE</a></li>
+      <li><a href="#web">WEB</a></li>
+      <li><a href="#video">VIDEO</a></li>
+      <li><a href="#writing">WRITING</a></li>
+    </ul>
+    <button type="button" class="nav__menu" aria-label="メニューを開く" aria-controls="nav-links" aria-expanded="false">
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero__content">
+      <span class="hero__label">Creative Director / Designer</span>
+      <h1 class="hero__title">
+        <span class="hero__title-line">KYOKO</span>
+        <span class="hero__title-line">MOMOSE</span>
+      </h1>
+      <p class="hero__sub">Web Design · Video · Writing · Music</p>
+    </div>
+
+    <div class="hero__image">
+      <div class="placeholder"><video src="images/sunawa.mov" autoplay muted loop playsinline></video></div>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true">
+      <span>SCROLL</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section class="about section" id="about">
+    <div class="section__label js-fade-line">PROFILE</div>
+
+    <!-- プロフィール上段 -->
+    <div class="about__inner">
+      <div class="about__image js-clip">
+        <div class="placeholder"><img src="images/kyoko_real.png" alt=""></div>
+      </div>
+      <div class="about__content">
+        <h2 class="about__name js-fade">百瀬 響子</h2>
+        <p class="about__name-en js-fade">Kyoko Momose</p>
+        <ul class="about__history">
+          <li class="js-fade"><span class="year">2001</span><span>慶應義塾大学 環境情報学部
+              卒業<br><small>佐藤雅彦研究会にて表現とメディアを専攻。絵本『コんガらガっち』制作に携わる。</small></span></li>
+          <li class="js-fade"><span class="year">2001</span><span>任天堂株式会社 入社<br><small>ポケモン
+                ルビー・サファイア、トモダチコレクション等の監修・テキスト制作。</small></span></li>
+          <li class="js-fade"><span
+              class="year">2011</span><span>フリーライターとして独立<br><small>心理テスト・タロット・謎解きアプリ等を多数担当。<br>ランサーズ認定ランサーとして1,000万円以上を売り上げる。</small></span>
+          </li>
+          <li class="js-fade"><span class="year">2022</span><span>株式会社OGA
+              入社<br><small>登録者100万人超チャンネルにて動画制作。<br>生成AIを用いたドリームコアチャンネルを運営。</small></span></li>
+          <li class="js-fade"><span class="year">2023</span><span>株式会社Whatever
+              業務提携<br><small>コピーライティング、ブログ制作、WEBデザイン、リーフレットデザイン等を担当。</small></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 自己PR：4つの強み -->
+    <div class="strengths">
+      <div class="strengths__intro js-fade">
+        <p class="strengths__lead">クリエイティブを通じて社会に貢献するため<br>私が大切にしている「4つの強み」</p>
+      </div>
+
+      <div class="strengths__track" id="strengthsTrack">
+
+        <!-- sticky サイドラベル -->
+        <div class="strengths__sticky">
+          <div class="strengths__sticky-num" id="strengthsNum">01</div>
+          <div class="strengths__sticky-bar"></div>
+        </div>
+
+        <!-- カード群 -->
+        <div class="strengths__cards">
+
+          <div class="strength-card" data-index="0">
+            <div class="strength-card__keyword">洞察力</div>
+            <h3 class="strength-card__title">文脈を読み解き、<br>真のニーズを捉える</h3>
+            <p class="strength-card__body">
+              任天堂でのコーディネーター業務や、タロット占いにおけるセッションを通じ、相手が言葉にできない真のニーズを汲み取り、納得感のある最適解を提示できるよう、努めて参りました。</p>
+          </div>
+
+          <div class="strength-card" data-index="1">
+            <div class="strength-card__keyword">表現力</div>
+            <h3 class="strength-card__title">クリエイティブへの深い理解と、<br>妥協のない姿勢</h3>
+            <p class="strength-card__body">言葉、デザイン、映像のクオリティに妥協せず、一文字、一画にまで魂を込めて仕上げます。受け手の心が動く瞬間を想像しながら、多角的な表現を追求し続けています。
+            </p>
+          </div>
+
+          <div class="strength-card" data-index="2">
+            <div class="strength-card__keyword">適応力</div>
+            <h3 class="strength-card__title">最新技術を身に付け、<br>即座に武器にする</h3>
+            <p class="strength-card__body">
+              100万人規模チャンネルでの動画制作や、生成AIの活用など、常に変化の最前線に身を置いてきました。新しい技術を恐れず自ら学び、表現力を柔軟に高め続ける適応力があると自負しております。</p>
+          </div>
+
+          <div class="strength-card" data-index="3">
+            <div class="strength-card__keyword">完遂力</div>
+            <h3 class="strength-card__title">プロとして最後まで<br>責任を持ち遂行する</h3>
+            <p class="strength-card__body">
+              大手企業に10年以上勤務した経験、また認定ランサーとして積み上げた実績は、一つひとつの期待に誠実に応え続けてきた証です。どのような難題でも最後まで責任を持って完遂いたします。</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- GAME -->
+  <section class="section" id="game">
+    <div class="section__label js-fade-line">GAME</div>
+    <p class="section__desc js-fade">任天堂株式会社在籍時に携わった作品です。</p>
+
+    <div class="game-scroll-wrap" id="gameScrollWrap">
+      <div class="game-track" id="gameTrack">
+
+        <a href="https://www.nintendo.co.jp/n08/axvp/index.html" target="_blank" rel="noopener" class="game-slide">
+          <div class="game-slide__image">
+            <img src="images/pokemon.png" alt="ポケットモンスター ルビー＆サファイア">
+          </div>
+          <div class="game-slide__info">
+            <span class="game-slide__num">01</span>
+            <h3 class="game-slide__title">ポケットモンスター<br>ルビー＆サファイア</h3>
+            <p class="game-slide__role">Coordination / Direction</p>
+            <p class="game-slide__desc">大人気ソフトの進行管理およびディレクションを担当。ランニングシューズの仕様を新たに追加する等の企画提案も行いました。</p>
+          </div>
+        </a>
+
+        <a href="https://www.nintendo.com/jp/switch/blfga/index.html" target="_blank" rel="noopener" class="game-slide">
+          <div class="game-slide__image">
+            <img src="images/tomocolle.png" alt="トモダチコレクション">
+          </div>
+          <div class="game-slide__info">
+            <span class="game-slide__num">02</span>
+            <h3 class="game-slide__title">トモダチ<br>コレクション</h3>
+            <p class="game-slide__role">Planning / Writing</p>
+            <p class="game-slide__desc">『適職の館』コーナーの監修とテキストを担当。オリジナルアバター『Mii』を使ったユニークなコミュニケーション体験を企画しました。</p>
+          </div>
+        </a>
+
+        <a href="https://www.nintendo.co.jp/ds/uorj/index.html" target="_blank" rel="noopener" class="game-slide">
+          <div class="game-slide__image">
+            <img src="images/ore.jpg" alt="メイドイン俺">
+          </div>
+          <div class="game-slide__info">
+            <span class="game-slide__num">03</span>
+            <h3 class="game-slide__title">メイドイン俺</h3>
+            <p class="game-slide__role">Direction / Planning</p>
+            <p class="game-slide__desc">「つくる」楽しさを提供するゲームシステムのディレクションを担当。自由度の高いクリエイティブ体験を形にするため、チュートリアル設計に力を注ぎました。</p>
+          </div>
+        </a>
+
+        <a href="https://www.nintendo.co.jp/ds/ychj/index.html" target="_blank" rel="noopener" class="game-slide">
+          <div class="game-slide__image">
+            <img src="images/cardhero.png" alt="高速カードバトル カードヒーロー">
+          </div>
+          <div class="game-slide__info">
+            <span class="game-slide__num">04</span>
+            <h3 class="game-slide__title">高速カードバトル<br>カードヒーロー</h3>
+            <p class="game-slide__role">Scenario Writing</p>
+            <p class="game-slide__desc">奥深い戦略性が魅力のカードゲームのシナリオを担当。プレイしながら自然にルールを理解できるよう、脚本テキストを丁寧に書き進めました。</p>
+          </div>
+        </a>
+
+        <div class="game-slide game-slide--more">
+          <div class="game-slide__more-inner">
+            <p class="game-slide__more-label">and more...</p>
+            <ul class="game-slide__more-list">
+              <li>ポケモンピンボール</li>
+              <li>ファイアーエムブレム</li>
+              <li>あつまれ！！メイドインワリオ</li>
+              <li>その他多数</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- プログレスバー -->
+      <div class="game-progress">
+        <div class="game-next-scroll" id="gameNextScroll" aria-hidden="true">
+          <span>SCROLL</span>
+          <div class="hero__scroll-line"></div>
+        </div>
+        <div class="game-progress__bar" id="gameProgressBar"></div>
+      </div>
+
+      <!-- ドラッグヒント -->
+      <div class="game-drag-hint js-fade" id="gameDragHint">
+        <span>DRAG</span>
+        <div class="game-drag-hint__arrow">→</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WEB WORKS -->
+  <section class="works section" id="web">
+    <div class="section__label js-fade-line">WEB</div>
+    <p class="section__desc js-fade">私がデザインしたウェブページです。<br><small>このポートフォリオも、制作実績の一つとしてご覧ください。</small></p>
+
+    <div class="works__grid">
+
+      <a href="https://whatever-ochanomizu.studio.site/" target="_blank" rel="noopener" class="work-card js-fade"
+        data-intent="京都の人気シェアオフィス「Whatever」が初めて東京へ進出する際に、Webページのデザインを担当しました。"
+        data-points="高級感と透明感を軸に、隠れ家のような雰囲気とアンティークな質感を大切にしました。大人の落ち着きが感じられるミニマルなデザインを目指しています。">
+        <div class="work-card__image">
+          <img src="images/ocha.jpg" alt="Whateverお茶の水">
+          <div class="work-card__overlay"><span>DETAILS</span></div>
+        </div>
+        <div class="work-card__info">
+          <h3>Whatever お茶の水</h3>
+          <p>東京・お茶の水のシェアオフィス</p>
+        </div>
+      </a>
+
+      <a href="https://aruniwatarot.studio.site/" target="_blank" rel="noopener" class="work-card js-fade"
+        data-intent="自身で運営していたタロット占いサロンのWebサイトです。"
+        data-points="神秘的な印象が強くなり過ぎないよう、モダンな雰囲気を取り入れました。ヒーリングサロンのような落ち着いたムードと、アカデミックなテイストを大切にしています。">
+        <div class="work-card__image">
+          <img src="images/aruniwa.jpg" alt="或庭 aruniwa">
+          <div class="work-card__overlay"><span>DETAILS</span></div>
+        </div>
+        <div class="work-card__info">
+          <h3>或庭 — aruniwa —</h3>
+          <p>タロット占いサロン</p>
+        </div>
+      </a>
+
+      <a href="https://nature-escape.studio.site/" target="_blank" rel="noopener" class="work-card js-fade"
+        data-intent="京都・下鴨で開催された写真展のWebページです。"
+        data-points="自然をテーマにした写真展に合わせ、木や空、土に馴染む色調を意識しました。実際の展示を巡りながら写真を鑑賞するような感覚を大切に、レイアウトを工夫しています。">
+        <div class="work-card__image">
+          <img src="images/nature.jpg" alt="nature escape">
+          <div class="work-card__overlay"><span>DETAILS</span></div>
+        </div>
+        <div class="work-card__info">
+          <h3>nature escape</h3>
+          <p>京都自然写真企画展</p>
+        </div>
+      </a>
+
+      <a href="https://unico-nail.vercel.app/" target="_blank" rel="noopener" class="work-card js-fade"
+        data-intent="千葉・蘇我にあるニュアンスネイル専門サロンのWebページを担当しました。"
+        data-points="ネイルの魅力が引き立つよう、余白を大切にしたデザインにしています。ギャラリーに掲載する写真の選定も担当しました。トップビューには立体感のある仕掛けを取り入れ、文字が浮かび上がって見える表現にこだわりました。">
+        <div class="work-card__image">
+          <img src="images/unico.jpg" alt="unico">
+          <div class="work-card__overlay"><span>DETAILS</span></div>
+        </div>
+        <div class="work-card__info">
+          <h3>unico</h3>
+          <p>ニュアンスネイル専門サロン</p>
+        </div>
+      </a>
+
+      <a href="https://andlobby.com" target="_blank" rel="noopener" class="work-card js-fade"
+        data-intent="京都・下鴨で自ら運営していたAI教室のWebページです。"
+        data-points="AIで生成した動画や画像を豊富に取り入れ、賑やかで楽しそうな、未来を感じる雰囲気に仕上げました。「自分もやってみたい！」と思ってもらえるデザインを目指しています。">
+        <div class="work-card__image">
+          <img src="images/and.jpg" alt="and lobby">
+          <div class="work-card__overlay"><span>DETAILS</span></div>
+        </div>
+        <div class="work-card__info">
+          <h3>and lobby</h3>
+          <p>新時代のAI教室</p>
+        </div>
+      </a>
+
+      <a href="https://u-nerior-01.studio.site/" target="_blank" rel="noopener" class="work-card js-fade"
+        data-intent="潜在的なアーティストの才能を発掘するイベントの企画・運営と、Webページのデザインを担当しました。"
+        data-points="才能の卵たちが夜に集い、蝶となって飛び回るイメージでブランディングを行いました。遠方からも来場者が訪れるなど、大きな反響がありました。">
+        <div class="work-card__image">
+          <img src="images/unerior.jpg" alt="U-nerior">
+          <div class="work-card__overlay"><span>DETAILS</span></div>
+        </div>
+        <div class="work-card__info">
+          <h3>U-nerior</h3>
+          <p>潜在アーティスト発掘企画</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- VIDEO -->
+  <section class="section" id="video">
+    <div class="section__label js-fade-line">VIDEO</div>
+    <p class="section__desc js-fade">私が手掛けた映像作品です。</p>
+
+    <div class="video-works">
+
+      <div class="video-item">
+        <div class="video-item__image js-clip">
+          <iframe src="https://www.youtube.com/embed/lfcQkQoj5zM" title="Lost in COMPLEX — YouTube動画"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+          </iframe>
+        </div>
+        <div class="video-item__content">
+          <div class="video-item__num js-fade">01</div>
+          <h3 class="video-item__title js-fade">Lost in COMPLEX</h3>
+          <p class="video-item__desc js-fade">ドリームコアと呼ばれる、夢の中のような不思議な世界観を表現した映像チャンネルをプロデュース。代表作「地下鉄水族館」は20万再生を突破。</p>
+          <a href="https://www.youtube.com/@Lost_in_COMPLEX" target="_blank" rel="noopener" class="video-item__link">→
+            チャンネルへ</a>
+        </div>
+      </div>
+
+      <div class="video-item">
+        <div class="video-item__image js-clip">
+          <iframe src="https://www.youtube.com/embed/NXM9OYRs1Tc" title="大人買いコレクター — YouTube動画"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+          </iframe>
+        </div>
+        <div class="video-item__content">
+          <div class="video-item__num js-fade">02</div>
+          <h3 class="video-item__title js-fade">大人買いコレクター</h3>
+          <p class="video-item__desc js-fade">登録者100万人を超えるおもちゃチャンネルにて動画制作を担当。楽器演奏、工作、知育菓子など幅広いコンテンツを撮影編集。</p>
+          <a href="https://www.youtube.com/@toycorps" target="_blank" rel="noopener" class="video-item__link">→
+            チャンネルへ</a>
+        </div>
+      </div>
+
+      <div class="video-item">
+        <div class="video-item__image js-clip">
+          <iframe src="https://www.youtube.com/embed/N6YD7xFGan0" title="オーロラガーデン — YouTube動画"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+          </iframe>
+        </div>
+        <div class="video-item__content">
+          <div class="video-item__num js-fade">03</div>
+          <h3 class="video-item__title js-fade">オーロラガーデン</h3>
+          <p class="video-item__desc js-fade">自己実現や開運を目指す人のためのスピリチュアルチャンネル。企画構成、脚本、AI音声生成、映像・音楽ディレクションを担当。</p>
+          <a href="https://www.youtube.com/@AURORA_GARDEN_RICO" target="_blank" rel="noopener"
+            class="video-item__link">→ チャンネルへ</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WRITING -->
+  <section class="section" id="writing">
+    <div class="section__label js-fade-line">WRITING</div>
+    <p class="section__desc js-fade">心理テストやブログなどのライティング実績です。</p>
+
+    <div class="writing-grid">
+
+      <a href="https://www.hokto-kinoko.co.jp/kinokolabo/psychological-test/" target="_blank" rel="noopener"
+        class="writing-item js-fade"
+        data-description="きのこのHokuto公式サイトにて、心理テストの制作を担当しました。設問の図柄や結果に必ずきのこが登場する、ユーモラスな心理テストです。">
+        <div class="writing-item__image">
+          <img src="images/kinoko.jpg" alt="きのこHokuto">
+        </div>
+        <p class="writing-item__sub">心理テスト</p>
+        <h3 class="writing-item__title">きのこHokuto</h3>
+        <p class="writing-item__role">Concept / Copywriting</p>
+      </a>
+
+      <a href="https://psychologicaltest.jp/archives/author/sunawa" target="_blank" rel="noopener"
+        class="writing-item js-fade"
+        data-description="心理テストサイト「shinri」にて、長年にわたり心理テストの制作を担当しました。図柄のデザインも手掛けています。ちょっとブラックでクスッと笑える結果文が好評でした。">
+        <div class="writing-item__image">
+          <img src="images/shinri.jpg" alt="shinri">
+        </div>
+        <p class="writing-item__sub">心理テスト</p>
+        <h3 class="writing-item__title">shinri</h3>
+        <p class="writing-item__role">Content Planning / Writing</p>
+      </a>
+
+      <a href="https://shimogamo-east.com/" target="_blank" rel="noopener" class="writing-item js-fade"
+        data-description="京都のシェアオフィス「Whatever」の別館「EAST」の立ち上げに際し、広告用のキャッチコピーやボディコピーを考案しました。Webページのテキストも担当しています。">
+        <div class="writing-item__image">
+          <img src="images/east.png" alt="Whatever East">
+        </div>
+        <p class="writing-item__sub">キャッチコピー制作</p>
+        <h3 class="writing-item__title">Whatever East</h3>
+        <p class="writing-item__role">Content Planning / Writing</p>
+      </a>
+
+      <a href="https://whatever-produce.com/column" target="_blank" rel="noopener" class="writing-item js-fade"
+        data-description="京都のシェアオフィス「Whatever」から依頼を受け、公式サイトのコラム連載を担当しました。左京区の魅力や建築にまつわる話題などを執筆していました。">
+        <div class="writing-item__image">
+          <img src="images/blog.jpg" alt="Whatever Official Blog">
+        </div>
+        <p class="writing-item__sub">オフィシャルブログ</p>
+        <h3 class="writing-item__title">Whatever</h3>
+        <p class="writing-item__role">Writing</p>
+      </a>
+
+      <a href="https://www.mysticmondays.com" target="_blank" rel="noopener" class="writing-item js-fade"
+        data-description="タロットカード「MYSTIC MONDAYS」の日本語版解説書を全編手掛けました。シンプルな言葉でカードの意味を解説し、初心者でも理解しやすい内容にしています。">
+        <div class="writing-item__image">
+          <img src="images/tarot.png" alt="MYSTIC MONDAYS">
+        </div>
+        <p class="writing-item__sub">タロットカード</p>
+        <h3 class="writing-item__title">MYSTIC MONDAYS</h3>
+        <p class="writing-item__role">Writing</p>
+      </a>
+
+      <a href="https://note.com/ai_to_philosophy" target="_blank" rel="noopener" class="writing-item js-fade"
+        data-description="ChatGPTとの日常のやりとりをコラムにまとめ、有料noteとして販売していました。AIと仲良くなるためのヒントや、哲学的な思索を交えた内容です。">
+        <div class="writing-item__image">
+          <img src="images/note.png" alt="AIと哲学">
+        </div>
+        <p class="writing-item__sub">note</p>
+        <h3 class="writing-item__title">AIと哲学</h3>
+        <p class="writing-item__role">Self Produce / Essay</p>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="footer__name">Kyoko Momose</p>
+    <p class="footer__copy">© 2026 KYOKO MOMOSE. All rights reserved.</p>
+  </footer>
+
+  <!-- GSAP -->
+
+  <!-- WEB作品詳細：各カードの data-intent / data-points に作品説明を設定できます。 -->
+  <dialog class="work-dialog" id="workDialog" aria-labelledby="workDialogTitle">
+    <div class="work-dialog__card">
+      <button class="work-dialog__close" type="button" aria-label="作品詳細を閉じる" autofocus>×</button>
+      <div class="work-dialog__visual"><img id="workDialogImage" src="images/ocha.jpg" alt=""></div>
+      <div class="work-dialog__body">
+        <p class="work-dialog__eyebrow">WEB DESIGN / PROJECT NOTE</p>
+        <h2 id="workDialogTitle"></h2>
+        <p class="work-dialog__category" id="workDialogCategory"></p>
+        <p class="work-dialog__summary" id="workDialogSummary" hidden></p>
+        <div class="work-dialog__note">
+          <h3>企画の意図</h3>
+          <p id="workDialogIntent"></p>
+        </div>
+        <div class="work-dialog__note">
+          <h3>こだわりのポイント</h3>
+          <p id="workDialogPoints"></p>
+        </div>
+        <a class="work-dialog__visit" id="workDialogVisit" target="_blank" rel="noopener noreferrer">サイトを見る <span
+            aria-hidden="true">↗</span><span class="work-dialog__sr">（新しいタブで開きます）</span></a>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+  <script src="script.js"></script>
+
+</body>
+
+</html>

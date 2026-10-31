@@ -1,0 +1,66 @@
+/* White × blue variant. Layout, imagery and animation remain in style.css. */
+:root {
+  --bg: #f7f9fc;
+  --bg-surface: #e9eff7;
+  --text: #293747;
+  --text-muted: #596777;
+  --accent: #356a9a;
+  --border: rgba(41, 55, 71, 0.24);
+  --border-light: rgba(41, 55, 71, 0.5);
+}
+.ambient-light {
+  background: radial-gradient(circle, #65bebd 0%, rgba(101, 190, 189, 0.65) 30%, transparent 70%);
+}
+.game-slide__image .placeholder,
+.game-slide__image img { filter: grayscale(0%); }
+/* Temporarily hide the hero subtitle; remove this rule to restore it. */
+.hero__sub { display: none; }
+.about__image {
+  width: 60%;
+  justify-self: center;
+  aspect-ratio: 1 / 1;
+  align-self: start;
+  border-radius: 50%;
+  overflow: hidden;
+  filter: grayscale(0.4) brightness(1.12);
+}
+@media (max-width: 768px) {
+  .about__image { max-width: 180px; }
+}
+.about__image > .placeholder { height: 100%; }
+.about__image img { object-fit: cover; object-position: center 35%; }
+.nav { mix-blend-mode: normal; }
+.cursor-follower { border-color: rgba(41, 55, 71, 0.5); }
+.placeholder {
+  background: linear-gradient(135deg, #e8eff7 0%, #dce7f3 50%, #edf2f8 100%);
+}
+.placeholder::after {
+  background: linear-gradient(135deg, transparent 40%, rgba(85, 135, 190, 0.04) 100%);
+}
+.about__history li small,
+.works .section__desc small,
+.work-card__info p { color: var(--text-muted); }
+.writing-item:hover,
+.game-track { background-color: rgba(85, 135, 190, 0.06); }
+.work-card__overlay { background: rgba(28, 48, 70, 0.6); }
+.work-card__overlay span { color: #f7f9fc; border-color: rgba(247, 249, 252, 0.7); }
+.work-dialog {
+  background: rgba(247, 249, 252, 0.62);
+  color: var(--text);
+  border-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(28px) saturate(125%);
+  -webkit-backdrop-filter: blur(28px) saturate(125%);
+  box-shadow: 0 28px 100px rgba(35, 60, 88, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+.work-dialog::backdrop { background: rgba(35, 60, 88, 0.32); }
+.work-dialog__visual { background: rgba(233, 239, 247, 0.35); }
+.work-dialog__note h3 { border-color: var(--border-light); }
+.work-dialog__close {
+  background: rgba(247, 249, 252, 0.95);
+  color: var(--text);
+  border-color: var(--border-light);
+}
+.work-dialog__visit { color: var(--accent); border-color: var(--border-light); }
+.work-dialog__visit:hover { background: rgba(53, 106, 154, 0.07); }
+.work-dialog :focus-visible,
+#web .work-card:focus-visible { outline-color: var(--accent); }

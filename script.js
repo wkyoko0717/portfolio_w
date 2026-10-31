@@ -1,0 +1,478 @@
+// WEB・ライティング作品の詳細カード（GSAPに依存せず、読み込み失敗時も操作可能）
+(function initWorkDetails() {
+  const dialog = document.querySelector('#workDialog');
+  if (!dialog || typeof dialog.showModal !== 'function') return;
+  const cards = document.querySelectorAll('#web .work-card, #writing .writing-item');
+  const close = dialog.querySelector('.work-dialog__close');
+  let opener;
+  let previousOverflow;
+  cards.forEach(card => {
+    card.setAttribute('aria-haspopup', 'dialog');
+    card.setAttribute('aria-controls', 'workDialog');
+    card.addEventListener('click', event => {
+      // 修飾キーで開く通常のリンク操作は維持する。
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      opener = card;
+      const image = card.querySelector('img');
+      dialog.querySelector('#workDialogTitle').textContent = card.querySelector('h3').textContent;
+      const isWriting = card.matches('.writing-item');
+      dialog.querySelector('.work-dialog__eyebrow').textContent = isWriting ? 'WRITING / PROJECT NOTE' : 'WEB DESIGN / PROJECT NOTE';
+      dialog.querySelector('#workDialogCategory').textContent = card.querySelector(isWriting ? '.writing-item__sub' : '.work-card__info p').textContent;
+      dialog.querySelectorAll('.work-dialog__note').forEach(note => { note.hidden = isWriting; });
+      const summary = dialog.querySelector('#workDialogSummary');
+      summary.hidden = !isWriting;
+      summary.textContent = isWriting ? (card.dataset.description || 'この作品についての一言説明を、ここに掲載予定です。') : '';
+      const preview = dialog.querySelector('#workDialogImage');
+      preview.src = image.src;
+      preview.alt = image.alt;
+      dialog.querySelector('#workDialogIntent').textContent = card.dataset.intent || 'この作品の企画背景・目的を、ここに掲載予定です。';
+      dialog.querySelector('#workDialogPoints').textContent = card.dataset.points || 'デザインや制作で工夫した点を、ここに掲載予定です。';
+      dialog.querySelector('#workDialogVisit').href = card.href;
+      previousOverflow = document.body.style.overflow;
+      dialog.showModal();
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  close.addEventListener('click', () => dialog.close());
+  let startedOutside = false;
+  dialog.addEventListener('pointerdown', event => { startedOutside = event.target === dialog; });
+  dialog.addEventListener('click', event => {
+    if (startedOutside && event.target === dialog) dialog.close();
+    startedOutside = false;
+  });
+  dialog.addEventListener('close', () => {
+    document.body.style.overflow = previousOverflow || '';
+    opener?.focus({ preventScroll: true });
+  });
+})();
+
+// モバイルナビゲーション
+(function initMobileNav() {
+  const nav = document.querySelector('.nav');
+  const button = document.querySelector('.nav__menu');
+  const links = document.querySelector('.nav__links');
+  const mobile = window.matchMedia('(max-width: 768px)');
+  function setOpen(open) {
+    nav.classList.toggle('is-open', open);
+    button.setAttribute('aria-expanded', String(open));
+    button.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+  }
+  button.addEventListener('click', () => setOpen(button.getAttribute('aria-expanded') !== 'true'));
+  links.addEventListener('click', event => {
+    if (event.target.closest('a')) {
+      setOpen(false);
+      if (mobile.matches) button.focus();
+    }
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && nav.classList.contains('is-open')) {
+      setOpen(false);
+      button.focus();
+    }
+  });
+  document.addEventListener('click', event => {
+    if (!nav.contains(event.target)) setOpen(false);
+  });
+  nav.addEventListener('focusout', event => {
+    if (!nav.contains(event.relatedTarget)) setOpen(false);
+  });
+  mobile.addEventListener('change', () => setOpen(false));
+})();
+
+// ============================================================
+//  script.js — GSAP Animations
+//  依存: gsap.min.js, ScrollTrigger.min.js
+// ============================================================
+
+gsap.registerPlugin(ScrollTrigger);
+
+// ============================================================
+//  ユーティリティ
+// ============================================================
+const qs = (sel, ctx = document) => ctx.querySelector(sel);
+const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+
+// ============================================================
+//  1. カスタムカーソル
+// ============================================================
+(function initCursor() {
+  const cursor = qs('#cursor');
+  const follower = qs('#cursor-follower');
+  if (!cursor || !follower) return;
+
+  let mouseX = 0, mouseY = 0;
+  let followerX = 0, followerY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    gsap.set(cursor, { x: mouseX, y: mouseY });
+  });
+
+  // フォロワーは少し遅れてついてくる
+  gsap.ticker.add(() => {
+    followerX += (mouseX - followerX) * 0.1;
+    followerY += (mouseY - followerY) * 0.1;
+    gsap.set(follower, { x: followerX, y: followerY });
+  });
+
+  // ホバーエフェクト
+  const hoverTargets = qsa('a, button, .work-card, .writing-item, .nav__menu');
+  hoverTargets.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.classList.add('is-hover');
+      follower.classList.add('is-hover');
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.classList.remove('is-hover');
+      follower.classList.remove('is-hover');
+    });
+  });
+})();
+
+// ============================================================
+//  2. ページロードアニメーション
+// ============================================================
+(function initPageLoad() {
+  const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+
+  // ヒーロータイトルの各行を下から上に
+  tl.from('.hero__title-line', {
+    y: '110%',
+    duration: 1.4,
+    stagger: 0.12,
+    ease: 'power4.out',
+  })
+    .from('.hero__label', {
+      opacity: 0,
+      y: 16,
+      duration: 1,
+    }, '-=0.8')
+    .from('.hero__sub', {
+      opacity: 0,
+      y: 16,
+      duration: 1,
+    }, '-=0.8')
+    .from('.nav', {
+      opacity: 0,
+      y: -20,
+      duration: 1,
+      clearProps: 'opacity,transform',
+    }, '-=1')
+    .from('.hero__scroll', {
+      opacity: 0,
+      y: 10,
+      duration: 0.8,
+    }, '-=0.6');
+
+  // ヒーロー画像：クリップパスで上から開く
+  tl.from('.hero__image', {
+    clipPath: 'inset(0 0 100% 0)',
+    duration: 1.6,
+    ease: 'power4.inOut',
+  }, 0.2);
+
+})();
+
+// ============================================================
+//  3. スクロールアニメーション（IntersectionObserver版）
+// ============================================================
+(function initScrollAnimations() {
+
+  gsap.set('.js-fade', { opacity: 0, y: 40 });
+  gsap.set('.js-fade-line', { opacity: 0, x: -30 });
+  gsap.set('.js-clip', { clipPath: 'inset(100% 0 0 0)' });
+  gsap.set('.work-card, .writing-item', { opacity: 0, y: 50 });
+  gsap.set('.game-slide', { opacity: 0, y: 30 });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+
+      if (el.classList.contains('js-fade')) {
+        gsap.to(el, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' });
+      }
+      else if (el.classList.contains('js-fade-line')) {
+        gsap.to(el, { opacity: 1, x: 0, duration: 1, ease: 'power3.out' });
+      }
+      else if (el.classList.contains('js-clip')) {
+        gsap.to(el, { clipPath: 'inset(0% 0 0 0)', duration: 1.4, ease: 'power4.inOut' });
+      }
+
+      observer.unobserve(el);
+    });
+  }, { threshold: 0 }); // 0にして確実に発火させる
+
+  // js-fade / js-fade-line / js-clip を監視
+  qsa('.js-fade, .js-fade-line, .js-clip').forEach(el => observer.observe(el));
+
+  // ワークカード・ライティングカード（スタガー）
+  const gridObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const cards = qsa('.work-card, .writing-item', entry.target);
+      gsap.to(cards, // fromTo → to に変更
+        { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: 'power3.out' }
+      );
+      gridObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0 });
+
+  qsa('.works__grid, .writing-grid').forEach(el => gridObserver.observe(el));
+
+  // ビデオアイテム
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (!entry.isIntersecting) return;
+      const direction = Array.from(qsa('.video-item')).indexOf(entry.target) % 2 === 0 ? -30 : 30;
+      gsap.fromTo(entry.target,
+        { opacity: 0, x: direction },
+        { opacity: 1, x: 0, duration: 1.2, ease: 'power3.out' }
+      );
+      videoObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.2 });
+
+  qsa('.video-item').forEach(el => videoObserver.observe(el));
+
+  // Aboutヒストリー
+  const historyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      gsap.fromTo(qsa('.about__history li'),
+        { opacity: 0, x: 20 },
+        { opacity: 1, x: 0, duration: 0.8, stagger: 0.12, ease: 'power2.out' }
+      );
+      historyObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.2 });
+
+  const history = qs('.about__history');
+  if (history) historyObserver.observe(history);
+
+  // Divider
+  const dividerObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      gsap.fromTo(entry.target,
+        { scaleX: 0, transformOrigin: 'left center' },
+        { scaleX: 1, duration: 1.2, ease: 'power3.inOut' }
+      );
+      dividerObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.5 });
+
+  qsa('.divider').forEach(el => dividerObserver.observe(el));
+
+  // Footer
+  const footerObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      gsap.fromTo('.footer__name',
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }
+      );
+      footerObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.3 });
+
+  const footer = qs('.footer');
+  if (footer) footerObserver.observe(footer);
+
+})();
+
+// ============================================================
+//  4. パララックス (ヒーロー画像)
+// ============================================================
+(function initParallax() {
+  gsap.to('.hero__image .placeholder', {
+    yPercent: 15,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true,
+    }
+  });
+})();
+
+// ============================================================
+//  5. スムーズスクロール (ナビリンク)
+// ============================================================
+(function initSmoothNav() {
+  qsa('.nav__links a, .nav__name').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = qs(link.getAttribute('href'));
+      if (!target) return;
+      gsap.to(window, {
+        duration: 1.4,
+        scrollTo: { y: target, offsetY: 0 },
+        ease: 'power3.inOut',
+      });
+    });
+  });
+})();
+
+// ============================================================
+//  背景光源パララックス
+// ============================================================
+(function initAmbientParallax() {
+  const lights = qsa('.ambient-light');
+  // コンテンツより30〜50%遅くスクロールさせる
+  const speeds = [0.35, 0.42, 0.28, 0.38, 0.45, 0.32];
+
+  lights.forEach((light, i) => {
+    const speed = speeds[i] || 0.4;
+    gsap.to(light, {
+      yPercent: -(100 * speed * 1.5),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: 'body',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1.5, // scrubを大きくするほど「ゆっくり追いかけてくる」感じになる
+      }
+    });
+  });
+})();
+
+// ============================================================
+//  自己PR：スクロール連動カード＋番号カウントアップ
+// ============================================================
+(function initStrengths() {
+  const cards = qsa('.strength-card');
+  const numEl = qs('#strengthsNum');
+  if (!cards.length || !numEl) return;
+
+  const nums = ['01', '02', '03', '04'];
+
+  cards.forEach((card, i) => {
+    ScrollTrigger.create({
+      trigger: card,
+      start: 'top 60%',
+      end: 'bottom 40%',
+      onEnter: () => {
+        // このカードをアクティブに
+        cards.forEach(c => c.classList.remove('is-active'));
+        card.classList.add('is-active');
+        // 番号をフリップ
+        gsap.to(numEl, {
+          opacity: 0,
+          y: -10,
+          duration: 0.2,
+          onComplete: () => {
+            numEl.textContent = nums[i];
+            gsap.to(numEl, { opacity: 1, y: 0, duration: 0.3 });
+          }
+        });
+      },
+      onEnterBack: () => {
+        cards.forEach(c => c.classList.remove('is-active'));
+        card.classList.add('is-active');
+        gsap.to(numEl, {
+          opacity: 0,
+          y: 10,
+          duration: 0.2,
+          onComplete: () => {
+            numEl.textContent = nums[i];
+            gsap.to(numEl, { opacity: 1, y: 0, duration: 0.3 });
+          }
+        });
+      },
+    });
+  });
+
+  // 最初のカードを最初からアクティブに
+  cards[0]?.classList.add('is-active');
+})();
+
+// ============================================================
+//  GAMEセクション — ScrollTrigger Pin 水平スクロール
+// ============================================================
+(function initGameScroll() {
+  const wrap = qs('#gameScrollWrap');
+  const track = qs('#gameTrack');
+  const progress = qs('#gameProgressBar');
+  const hint = qs('#gameDragHint');
+  const nextScroll = qs('#gameNextScroll');
+  if (!wrap || !track) return;
+
+  // 一覧が流れ切った後は、短い案内区間を経て固定を解除する。
+  const exitScrollDistance = 160;
+  const getScrollAmount = () => -(track.scrollWidth + exitScrollDistance);
+  const updateNextScroll = () => {
+    if (!nextScroll) return;
+    const trackBounds = track.getBoundingClientRect();
+    const wrapBounds = wrap.getBoundingClientRect();
+    nextScroll.classList.toggle('is-visible', trackBounds.right <= wrapBounds.left);
+  };
+
+  // ピン留め＋横スクロール
+  gsap.to(track, {
+    x: getScrollAmount,
+    ease: 'none',
+    onUpdate: updateNextScroll,
+    scrollTrigger: {
+      trigger: wrap,
+      invalidateOnRefresh: true,
+      onRefresh: updateNextScroll,
+      pin: true,           // このセクションを画面に固定
+      scrub: 0.6,          // スクロール操作への追従を滑らかにする
+      start: () => {
+        // 画面幅にかかわらず上寄りで固定し、進捗バーの下に24pxの余白を確保する。
+        const bar = progress?.parentElement;
+        const barBottom = bar ? bar.offsetTop + bar.offsetHeight : wrap.offsetHeight;
+        const pinTop = Math.min(80, window.innerHeight - barBottom - 24);
+        return `top ${pinTop}px`;
+      },
+      end: () => `+=${-getScrollAmount()}`,
+      anticipatePin: 1,
+      onUpdate: (self) => {
+        if (progress) progress.style.width = `${self.progress * 100}%`;
+        if (hint && self.progress > 0.02) gsap.to(hint, { opacity: 0, duration: 0.3 });
+      },
+    }
+  });
+
+  // ドラッグは念のため残す（タッチ用）
+  let startX = 0;
+  wrap.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+
+  // スライドごとの入場アニメーション
+  qsa('.game-slide').forEach((slide, i) => {
+    gsap.fromTo(slide,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.9,
+        delay: i * 0.08,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: wrap,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+          invalidateOnRefresh: true, // ← これを全部に追加
+
+        }
+      }
+    );
+  });
+
+})();
+
+window.addEventListener('load', () => {
+  ScrollTrigger.refresh();
+});
+
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    ScrollTrigger.refresh(true);
+  }, 300);
+});
