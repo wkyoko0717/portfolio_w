@@ -42,9 +42,11 @@
     <a href="#hero" class="nav__name">KYOKO MOMOSE</a>
     <ul class="nav__links" id="nav-links">
       <li><a href="#about">PROFILE</a></li>
+      <li><a href="#game">GAME</a></li>
       <li><a href="#web">WEB</a></li>
       <li><a href="#video">VIDEO</a></li>
       <li><a href="#writing">WRITING</a></li>
+      <li><a href="#contact">CONTACT</a></li>
     </ul>
     <button type="button" class="nav__menu" aria-label="メニューを開く" aria-controls="nav-links" aria-expanded="false">
       <span></span>
@@ -61,6 +63,15 @@
         <span class="hero__title-line">MOMOSE</span>
       </h1>
       <p class="hero__sub">Web Design · Video · Writing · Music</p>
+      <nav class="hero__works" aria-label="制作実績">
+        <p class="hero__works-label">制作実績を見る</p>
+        <div class="hero__works-links">
+          <a class="hero__work-link" href="#game">GAME</a>
+          <a class="hero__work-link hero__work-link--primary" href="#web">WEB</a>
+          <a class="hero__work-link" href="#video">VIDEO</a>
+          <a class="hero__work-link" href="#writing">WRITING</a>
+        </div>
+      </nav>
     </div>
 
     <div class="hero__image">
@@ -463,6 +474,18 @@
         <p class="writing-item__role">Self Produce / Essay</p>
       </a>
 
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact section" id="contact" aria-labelledby="contact-title">
+    <div class="section__label">CONTACT</div>
+    <div class="contact__inner">
+      <h2 id="contact-title">制作のご相談・お問い合わせ</h2>
+      <p class="contact__description">Web・文章・映像制作のご相談を承ります。</p>
+      <p class="contact__email">wkyoko0717@gmail.com</p>
+      <button class="contact__copy" type="button" data-copy-email="wkyoko0717@gmail.com">メールアドレスをコピー</button>
+      <p class="contact__status" role="status" aria-live="polite"></p>
     </div>
   </section>
 

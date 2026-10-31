@@ -1,3 +1,30 @@
+// メールアプリを使わずに連絡先をコピーできるようにする。
+(function initContactCopy() {
+  const button = document.querySelector('[data-copy-email]');
+  const status = document.querySelector('.contact__status');
+  if (!button || !status) return;
+  button.addEventListener('click', async () => {
+    const email = button.dataset.copyEmail;
+    let copied = false;
+    try {
+      await navigator.clipboard.writeText(email);
+      copied = true;
+    } catch (_) {
+      const field = document.createElement('textarea');
+      field.value = email;
+      field.readOnly = true;
+      field.style.cssText = 'position:fixed;left:-9999px;top:0;';
+      document.body.appendChild(field);
+      field.select();
+      field.setSelectionRange(0, email.length);
+      try { copied = document.execCommand('copy'); } catch (_) {}
+      field.remove();
+      button.focus({ preventScroll: true });
+    }
+    status.textContent = copied ? 'メールアドレスをコピーしました。' : 'コピーできませんでした。表示されているアドレスを選択してコピーしてください。';
+  });
+})();
+
 // WEB・ライティング作品の詳細カード（GSAPに依存せず、読み込み失敗時も操作可能）
 (function initWorkDetails() {
   const dialog = document.querySelector('#workDialog');
