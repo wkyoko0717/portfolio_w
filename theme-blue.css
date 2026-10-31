@@ -16,6 +16,8 @@
 /* Temporarily hide the hero subtitle; remove this rule to restore it. */
 .hero__sub { display: none; }
 .about__image {
+  position: relative;
+  top: auto;
   width: 60%;
   justify-self: center;
   aspect-ratio: 1 / 1;
@@ -27,7 +29,12 @@
 @media (max-width: 768px) {
   .about__image { max-width: 180px; }
 }
-.about__image > .placeholder { height: 100%; }
+.about__image > .placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
 .about__image img { object-fit: cover; object-position: center 35%; }
 .nav { mix-blend-mode: normal; }
 .cursor-follower { border-color: rgba(41, 55, 71, 0.5); }
