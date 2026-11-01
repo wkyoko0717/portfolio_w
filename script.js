@@ -48,8 +48,13 @@
       dialog.querySelector('#workDialogCategory').textContent = card.querySelector(isWriting ? '.writing-item__sub' : '.work-card__info p').textContent;
       dialog.querySelectorAll('.work-dialog__note').forEach(note => { note.hidden = isWriting; });
       const summary = dialog.querySelector('#workDialogSummary');
-      summary.hidden = !isWriting;
-      summary.textContent = isWriting ? (card.dataset.description || 'この作品についての一言説明を、ここに掲載予定です。') : '';
+      const hasMeta = !isWriting && Boolean(card.dataset.role || card.dataset.tools);
+      summary.hidden = !isWriting && !hasMeta;
+      summary.textContent = isWriting ? (card.dataset.description || 'この作品についての一言説明を、ここに掲載予定です。') : (hasMeta ? card.dataset.intent || '' : '');
+      dialog.querySelector('#workDialogIntent').parentElement.hidden = isWriting || hasMeta;
+      dialog.querySelector('#workDialogMeta').hidden = !hasMeta;
+      dialog.querySelector('#workDialogRole').textContent = card.dataset.role || '';
+      dialog.querySelector('#workDialogTools').textContent = card.dataset.tools || '';
       const preview = dialog.querySelector('#workDialogImage');
       preview.src = image.src;
       preview.alt = image.alt;

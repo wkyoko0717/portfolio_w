@@ -16,7 +16,7 @@
 
   <!-- スタイル (SCSSをコンパイルしたCSS) -->
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="theme-blue.css?v=3311ba106af7">
+  <link rel="stylesheet" href="theme-blue.css?v=7d62eb79f5e8">
 </head>
 
 <body>
@@ -42,8 +42,9 @@
     <a href="#hero" class="nav__name">KYOKO MOMOSE</a>
     <ul class="nav__links" id="nav-links">
       <li><a href="#about">PROFILE</a></li>
-      <li><a href="#game">GAME</a></li>
       <li><a href="#web">WEB</a></li>
+      <li><a href="#graphic">GRAPHIC</a></li>
+      <li><a href="#game">GAME</a></li>
       <li><a href="#video">VIDEO</a></li>
       <li><a href="#writing">WRITING</a></li>
       <li><a href="#contact">CONTACT</a></li>
@@ -66,8 +67,9 @@
       <nav class="hero__works" aria-label="制作実績">
         <p class="hero__works-label">制作実績を見る</p>
         <div class="hero__works-links">
-          <a class="hero__work-link" href="#game">GAME</a>
           <a class="hero__work-link hero__work-link--primary" href="#web">WEB</a>
+          <a class="hero__work-link" href="#graphic">GRAPHIC</a>
+          <a class="hero__work-link" href="#game">GAME</a>
           <a class="hero__work-link" href="#video">VIDEO</a>
           <a class="hero__work-link" href="#writing">WRITING</a>
         </div>
@@ -164,6 +166,133 @@
 
   <div class="divider"></div>
 
+  <!-- WEB WORKS -->
+  <section class="works section" id="web">
+    <div class="section__label js-fade-line">WEB</div>
+    <p class="section__desc js-fade">私がデザインしたウェブページです。<br><small>このポートフォリオも、制作実績の一つとしてご覧ください。</small></p>
+
+    <div class="works__grid">
+
+      <a href="https://whatever-ochanomizu.studio.site/" target="_blank" rel="noopener" class="work-card js-fade"
+        data-role="デザイン／文章／実装" data-tools="STUDIO"
+        data-intent="京都の人気シェアオフィス「Whatever」が初めて東京へ進出する際に、Webページのデザインを担当しました。"
+        data-points="高級感と透明感を軸に、隠れ家のような雰囲気とアンティークな質感を大切にしました。大人の落ち着きが感じられるミニマルなデザインを目指しています。">
+        <div class="work-card__image">
+          <img src="images/ocha.jpg" alt="Whateverお茶の水">
+          <div class="work-card__overlay"><span>DETAILS</span></div>
+        </div>
+        <div class="work-card__info">
+          <h3>Whatever お茶の水</h3>
+          <p>東京・お茶の水のシェアオフィス</p>
+        </div>
+      </a>
+
+      <a href="https://aruniwatarot.studio.site/" target="_blank" rel="noopener" class="work-card js-fade"
+        data-role="企画／デザイン／文章／実装" data-tools="STUDIO"
+        data-intent="自身で運営していたタロット占いサロンのWebサイトです。"
+        data-points="神秘的な印象が強くなり過ぎないよう、モダンな雰囲気を取り入れました。ヒーリングサロンのような落ち着いたムードと、アカデミックなテイストを大切にしています。">
+        <div class="work-card__image">
+          <img src="images/aruniwa.jpg" alt="或庭 aruniwa">
+          <div class="work-card__overlay"><span>DETAILS</span></div>
+        </div>
+        <div class="work-card__info">
+          <h3>或庭 — aruniwa —</h3>
+          <p>タロット占いサロン</p>
+        </div>
+      </a>
+
+      <a href="https://nature-escape.studio.site/" target="_blank" rel="noopener" class="work-card js-fade"
+        data-role="デザイン／文章／実装" data-tools="Canva"
+        data-intent="京都・下鴨で開催された写真展のWebページです。"
+        data-points="自然をテーマにした写真展に合わせ、木や空、土に馴染む色調を意識しました。実際の展示を巡りながら写真を鑑賞するような感覚を大切に、レイアウトを工夫しています。">
+        <div class="work-card__image">
+          <img src="images/nature.jpg" alt="nature escape">
+          <div class="work-card__overlay"><span>DETAILS</span></div>
+        </div>
+        <div class="work-card__info">
+          <h3>nature escape</h3>
+          <p>京都自然写真企画展</p>
+        </div>
+      </a>
+
+      <a href="https://unico-nail.vercel.app/" target="_blank" rel="noopener" class="work-card js-fade"
+        data-role="デザイン／文章／実装" data-tools="HTML／CSS／JavaScript"
+        data-intent="千葉・蘇我にあるニュアンスネイル専門サロンのWebページを担当しました。"
+        data-points="ネイルの魅力が引き立つよう、余白を大切にしたデザインにしています。ギャラリーに掲載する写真の選定も担当しました。トップビューには立体感のある仕掛けを取り入れ、文字が浮かび上がって見える表現にこだわりました。">
+        <div class="work-card__image">
+          <img src="images/unico.jpg" alt="unico">
+          <div class="work-card__overlay"><span>DETAILS</span></div>
+        </div>
+        <div class="work-card__info">
+          <h3>unico</h3>
+          <p>ニュアンスネイル専門サロン</p>
+        </div>
+      </a>
+
+      <a href="https://andlobby.com" target="_blank" rel="noopener" class="work-card js-fade"
+        data-role="企画／デザイン／文章／実装" data-tools="Canva"
+        data-intent="京都・下鴨で自ら運営していたAI教室のWebページです。"
+        data-points="AIで生成した動画や画像を豊富に取り入れ、賑やかで楽しそうな、未来を感じる雰囲気に仕上げました。「自分もやってみたい！」と思ってもらえるデザインを目指しています。">
+        <div class="work-card__image">
+          <img src="images/and.jpg" alt="and lobby">
+          <div class="work-card__overlay"><span>DETAILS</span></div>
+        </div>
+        <div class="work-card__info">
+          <h3>and lobby</h3>
+          <p>新時代のAI教室</p>
+        </div>
+      </a>
+
+      <a href="https://u-nerior-01.studio.site/" target="_blank" rel="noopener" class="work-card js-fade"
+        data-role="企画／デザイン／文章／実装" data-tools="STUDIO"
+        data-intent="潜在的なアーティストの才能を発掘するイベントの企画・運営と、Webページのデザインを担当しました。"
+        data-points="才能の卵たちが夜に集い、蝶となって飛び回るイメージでブランディングを行いました。遠方からも来場者が訪れるなど、大きな反響がありました。">
+        <div class="work-card__image">
+          <img src="images/unerior.jpg" alt="U-nerior">
+          <div class="work-card__overlay"><span>DETAILS</span></div>
+        </div>
+        <div class="work-card__info">
+          <h3>U-nerior</h3>
+          <p>潜在アーティスト発掘企画</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- GRAPHIC -->
+  <section class="graphic section" id="graphic" aria-labelledby="graphic-label">
+    <div class="section__label" id="graphic-label">GRAPHIC</div>
+    <div class="graphic__layout">
+      <div class="graphic__intro">
+        <p class="graphic__category">LEAFLET DESIGN</p>
+        <h2 class="graphic__title">或庭<span>— aruniwa —</span></h2>
+        <p class="graphic__description">タロット占いサロン「或庭」の<br>三つ折りリーフレット。</p>
+        <p class="graphic__description">植物や光、静かな空間の写真と、<br>余白を生かした紙面構成。</p>
+        <div class="graphic__photo-frame">
+          <img class="graphic__photo" src="images/aruniwa_leaflet.jpg" width="3024" height="3024" alt="木のテーブルに置いた、或庭の印刷されたリーフレット。苔の写真を使った表紙。" loading="lazy">
+        </div>
+        <a class="graphic__pdf" href="images/aruniwa-web.pdf" target="_blank" rel="noopener">
+          <span>PDFを見る <small>約11MB</small></span><span aria-hidden="true">↗</span>
+          <span class="graphic__sr">（新しいタブで開きます）</span>
+        </a>
+      </div>
+      <figure class="graphic__preview">
+        <a class="graphic__sheet" href="images/aruniwa-leaflet-top.jpg" target="_blank" rel="noopener" aria-label="リーフレットの上段を拡大表示（新しいタブ）">
+          <img src="images/aruniwa-leaflet-top.jpg" width="1364" height="456" alt="或庭の三つ折りリーフレット。植物と鉱石の写真を使ったサービス紹介と、苔の写真を使った表紙。" loading="lazy">
+        </a>
+        <a class="graphic__sheet" href="images/aruniwa-leaflet-bottom.jpg" target="_blank" rel="noopener" aria-label="リーフレットの下段を拡大表示（新しいタブ）">
+          <img src="images/aruniwa-leaflet-bottom.jpg" width="1364" height="470" alt="或庭のリーフレット。サロンの写真、紹介文、ロゴとアクセス情報を配置した展開図。" loading="lazy">
+        </a>
+        <figcaption>画像をタップすると拡大できます。</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
   <!-- GAME -->
   <section class="section" id="game">
     <div class="section__label js-fade-line">GAME</div>
@@ -248,96 +377,6 @@
         <span>DRAG</span>
         <div class="game-drag-hint__arrow">→</div>
       </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- WEB WORKS -->
-  <section class="works section" id="web">
-    <div class="section__label js-fade-line">WEB</div>
-    <p class="section__desc js-fade">私がデザインしたウェブページです。<br><small>このポートフォリオも、制作実績の一つとしてご覧ください。</small></p>
-
-    <div class="works__grid">
-
-      <a href="https://whatever-ochanomizu.studio.site/" target="_blank" rel="noopener" class="work-card js-fade"
-        data-intent="京都の人気シェアオフィス「Whatever」が初めて東京へ進出する際に、Webページのデザインを担当しました。"
-        data-points="高級感と透明感を軸に、隠れ家のような雰囲気とアンティークな質感を大切にしました。大人の落ち着きが感じられるミニマルなデザインを目指しています。">
-        <div class="work-card__image">
-          <img src="images/ocha.jpg" alt="Whateverお茶の水">
-          <div class="work-card__overlay"><span>DETAILS</span></div>
-        </div>
-        <div class="work-card__info">
-          <h3>Whatever お茶の水</h3>
-          <p>東京・お茶の水のシェアオフィス</p>
-        </div>
-      </a>
-
-      <a href="https://aruniwatarot.studio.site/" target="_blank" rel="noopener" class="work-card js-fade"
-        data-intent="自身で運営していたタロット占いサロンのWebサイトです。"
-        data-points="神秘的な印象が強くなり過ぎないよう、モダンな雰囲気を取り入れました。ヒーリングサロンのような落ち着いたムードと、アカデミックなテイストを大切にしています。">
-        <div class="work-card__image">
-          <img src="images/aruniwa.jpg" alt="或庭 aruniwa">
-          <div class="work-card__overlay"><span>DETAILS</span></div>
-        </div>
-        <div class="work-card__info">
-          <h3>或庭 — aruniwa —</h3>
-          <p>タロット占いサロン</p>
-        </div>
-      </a>
-
-      <a href="https://nature-escape.studio.site/" target="_blank" rel="noopener" class="work-card js-fade"
-        data-intent="京都・下鴨で開催された写真展のWebページです。"
-        data-points="自然をテーマにした写真展に合わせ、木や空、土に馴染む色調を意識しました。実際の展示を巡りながら写真を鑑賞するような感覚を大切に、レイアウトを工夫しています。">
-        <div class="work-card__image">
-          <img src="images/nature.jpg" alt="nature escape">
-          <div class="work-card__overlay"><span>DETAILS</span></div>
-        </div>
-        <div class="work-card__info">
-          <h3>nature escape</h3>
-          <p>京都自然写真企画展</p>
-        </div>
-      </a>
-
-      <a href="https://unico-nail.vercel.app/" target="_blank" rel="noopener" class="work-card js-fade"
-        data-intent="千葉・蘇我にあるニュアンスネイル専門サロンのWebページを担当しました。"
-        data-points="ネイルの魅力が引き立つよう、余白を大切にしたデザインにしています。ギャラリーに掲載する写真の選定も担当しました。トップビューには立体感のある仕掛けを取り入れ、文字が浮かび上がって見える表現にこだわりました。">
-        <div class="work-card__image">
-          <img src="images/unico.jpg" alt="unico">
-          <div class="work-card__overlay"><span>DETAILS</span></div>
-        </div>
-        <div class="work-card__info">
-          <h3>unico</h3>
-          <p>ニュアンスネイル専門サロン</p>
-        </div>
-      </a>
-
-      <a href="https://andlobby.com" target="_blank" rel="noopener" class="work-card js-fade"
-        data-intent="京都・下鴨で自ら運営していたAI教室のWebページです。"
-        data-points="AIで生成した動画や画像を豊富に取り入れ、賑やかで楽しそうな、未来を感じる雰囲気に仕上げました。「自分もやってみたい！」と思ってもらえるデザインを目指しています。">
-        <div class="work-card__image">
-          <img src="images/and.jpg" alt="and lobby">
-          <div class="work-card__overlay"><span>DETAILS</span></div>
-        </div>
-        <div class="work-card__info">
-          <h3>and lobby</h3>
-          <p>新時代のAI教室</p>
-        </div>
-      </a>
-
-      <a href="https://u-nerior-01.studio.site/" target="_blank" rel="noopener" class="work-card js-fade"
-        data-intent="潜在的なアーティストの才能を発掘するイベントの企画・運営と、Webページのデザインを担当しました。"
-        data-points="才能の卵たちが夜に集い、蝶となって飛び回るイメージでブランディングを行いました。遠方からも来場者が訪れるなど、大きな反響がありました。">
-        <div class="work-card__image">
-          <img src="images/unerior.jpg" alt="U-nerior">
-          <div class="work-card__overlay"><span>DETAILS</span></div>
-        </div>
-        <div class="work-card__info">
-          <h3>U-nerior</h3>
-          <p>潜在アーティスト発掘企画</p>
-        </div>
-      </a>
-
     </div>
   </section>
 
@@ -504,6 +543,10 @@
         <h2 id="workDialogTitle"></h2>
         <p class="work-dialog__category" id="workDialogCategory"></p>
         <p class="work-dialog__summary" id="workDialogSummary" hidden></p>
+        <dl class="work-dialog__meta" id="workDialogMeta" hidden>
+          <div><dt>担当範囲</dt><dd id="workDialogRole"></dd></div>
+          <div><dt>制作ツール</dt><dd id="workDialogTools"></dd></div>
+        </dl>
         <div class="work-dialog__note">
           <h3>企画の意図</h3>
           <p id="workDialogIntent"></p>
@@ -521,7 +564,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
-  <script src="script.js?v=059994e434f6"></script>
+  <script src="script.js?v=5e30b76491ff"></script>
 
 </body>
 
